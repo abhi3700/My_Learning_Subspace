@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "async_fileio",
+    # "rocksdb",
+    # "trie",
+    # "libp2p",
+]
+# considering all the projects are following rust 2021.
+resolver = "2"
