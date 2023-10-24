@@ -3,6 +3,7 @@
 //! Update means it could be:
 //! - adding new content to existing content
 //! - replacing existing content with a new one
+//! - update a particular line of the file content i.e. update partially
 
 use tokio::fs::File;
 use tokio::fs::OpenOptions;
@@ -43,6 +44,13 @@ pub(crate) async fn update_replace_ewn_content() -> Result<()> {
     } else {
         panic!("Sorry! The file \"demo.txt\" doesn't exist.");
     }
+
+    Ok(())
+}
+
+/// update partially
+pub(crate) async fn update_partially() -> Result<()> {
+    todo!();
 
     Ok(())
 }
