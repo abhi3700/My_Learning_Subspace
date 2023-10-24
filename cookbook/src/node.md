@@ -95,7 +95,9 @@ node.subscribe_new_heads()
     .await;
 ```
 
-In order to view fresh block production, you have to remove the `parity_db` folder, else it will stop producing blocks after 10 blocks like `1` -> `9` and then `10` -> `18` and `20`
+Here, `take(10)` method will stop authoring blocks after running 10 blocks.
+
+In order to view fresh block production, you have to remove the `parity_db` folder, else it will stop producing blocks after 10 blocks like `0` -> `9` and then `10` -> `18` and `19` -> `27` and so on.
 
 ```sh
 $ rm -rf /path/to/parity_db
