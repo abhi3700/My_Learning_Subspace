@@ -11,7 +11,7 @@
 //!     at a time via chains like this...
 //!     - 'r': `OpenOptions::new().read(true)`
 //!     - 'rw': `OpenOptions::new().read(true).write(true)`
-//!     - 'rw': `OpenOptions::new().write(true)`
+//!     - 'w': `OpenOptions::new().write(true)`
 //!
 //! We can also read the file:
 //! - entirely via `read_to_end`
