@@ -1,2 +1,3 @@
-Good morning!
- My name is Abhi and I joined Subspace Labs as Solidity Dev.
+The project is very exciting! It has potentially the best consensus algorithm 
+observed so far ensuring the Blockchain trilemma.est consensus algorithm 
+observed so far ensuring the Blockchain trilemma.

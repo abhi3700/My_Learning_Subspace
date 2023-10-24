@@ -17,7 +17,6 @@
 //! - entirely via `read_to_end`
 //! - partially via `read`
 
-#[allow(unused_imports)]
 use tokio::fs::{File, OpenOptions};
 use tokio::io::AsyncReadExt;
 use tokio::io::Result;
