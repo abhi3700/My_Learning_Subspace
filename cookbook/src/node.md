@@ -30,7 +30,7 @@ pub type Node = sdk_node::Node<Farmer>;
 ### How to create a simple Subspace node?
 
 ```rust
-//! Source code: https://github.com/subspace/subspace-sdk/blob/main/examples/simple.rs
+//! Source code at file: https://github.com/subspace/subspace-sdk/blob/main/examples/simple.rs
 
 // import the required crates
 use subspace_sdk::Node;
@@ -52,7 +52,7 @@ let node = subspace_sdk::Node::builder()
 ### How to create an advanced Subspace node with some network option to listen for peers' addresses?
 
 ```rust
-//! Source code: https://github.com/subspace/subspace-sdk/blob/main/examples/sync.rs
+//! Source code at file: https://github.com/subspace/subspace-sdk/blob/main/examples/sync.rs
 
 // import the required crates
 use subspace_sdk::Node;
@@ -97,8 +97,12 @@ node.subscribe_new_heads()
 
 Here, `take(10)` method will stop authoring blocks after running 10 blocks.
 
-In order to view fresh block production, you have to remove the `parity_db` folder, else it will stop producing blocks after 10 blocks like `0` -> `9` and then `10` -> `18` and `19` -> `27` and so on.
+In order to view fresh block production, you have to remove the `parity_db` folder, else it will stop producing blocks after 10 blocks like `0` -> `9` and then `9` -> `18` and `18` -> `27` and so on.
+
+> Please note here that the block which the previous iteration ended at, the same block number the next iteration will start from. E.g. Like in this case, run-1 ended at `9` block, run-2 will start from `9` block and end at `18` block and so on. So, the total blocks produced is 10 in each iteration.
 
 ```sh
 $ rm -rf /path/to/parity_db
 ```
+
+### How to set a chain spec for a node?
