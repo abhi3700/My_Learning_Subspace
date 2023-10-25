@@ -1,6 +1,8 @@
 [workspace]
 members = [
-    "async_fileio",
+    "async-fileio",
+    "substrate-design-patterns",
+    # "subspace-sdk-playground",
     # "rocksdb",
     # "trie",
     # "libp2p",

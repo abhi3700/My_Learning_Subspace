@@ -7,7 +7,9 @@
 
 use tokio::fs::File;
 use tokio::fs::OpenOptions;
+use tokio::io::AsyncBufReadExt;
 use tokio::io::AsyncWriteExt;
+use tokio::io::BufReader;
 use tokio::io::Result;
 
 /// adding new content to existing content
@@ -31,7 +33,7 @@ pub(crate) async fn update_add_new_content() -> Result<()> {
 
 /// replacing existing content with a new one
 pub(crate) async fn update_replace_ewn_content() -> Result<()> {
-    // if the file exists, then append
+    // if the file exists, then replace entirely
     if tokio::fs::try_exists("demo.txt").await? {
         // opening a file in write-only (append) mode as permission
         let mut file = OpenOptions::new().write(true).open("demo.txt").await?;
@@ -50,7 +52,21 @@ pub(crate) async fn update_replace_ewn_content() -> Result<()> {
 
 /// update partially
 pub(crate) async fn update_partially() -> Result<()> {
-    todo!();
+    // if file exists, then update partially
+    if tokio::fs::try_exists("demo.txt").await? {
+        // open the file in read mode
+        let input_file = OpenOptions::new().read(true).open("demo.txt").await?;
+
+        // put into a reader buffer
+        let reader = BufReader::new(input_file);
+
+        // get lines mutable reference
+        let lines = reader.lines().get_mut().lines();
+
+        let line = 2;
+    } else {
+        panic!("Sorry! The file \"demo.txt\" doesn't exist.");
+    }
 
     Ok(())
 }
