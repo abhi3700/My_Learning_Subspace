@@ -13,6 +13,6 @@ We will start with these:
 5. [ ] How to use clap for making commands for your code snippets or set of functions?
 6. [x] How to create a subspace node?
 7. [x] How to create a subspace farmer?
-8. [ ] How to create a subspace farm/plot?
+8. [x] How to create a subspace farm/plot?
 9. [ ] How to scan for solution in subspace farms/plots?
 10. [x] How to exit a node after running few blocks?

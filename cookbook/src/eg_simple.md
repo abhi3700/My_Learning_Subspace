@@ -2,7 +2,7 @@
 
 ## Overview
 
-This example shows how to spin up a node and start farming with 10 blocks of execution and then exit the node.
+This example shows how to setup a Subspace node and initializes a farmer instance. And then does plotting for each farm and logging information about each new block for the next 10 blocks.
 
 ## Imports
 
@@ -23,15 +23,103 @@ These imports are used in the main function of the file to initialize a `Farmer`
 
 ## Main function
 
+This code defines an asynchronous function `main` that is marked with the `#[tokio::main]` attribute. This attribute is used to indicate that the function should be run using the Tokio runtime.
+
+```rust
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt().init();
+    // === do something ===
+}
+```
+
+The function initializes a tracing subscriber for logging purposes using the `tracing_subscriber::fmt().init()` function.
+
+> Now, the code hereafter is put inside the main function following the code in this step inside `main` function.
+
 ### Farm creation
+
+Let's define the plot for a farmer. The plot is defined as a `FarmDescription` struct. So, the array contains a single `FarmDescription` struct.
+
+```rust
+    let plots = [subspace_sdk::FarmDescription::new("plot", subspace_sdk::ByteSize::mb(1072))];
+```
+
+The min. size of the plot set as `1070780769` bytes or `1071` MB (approx.). So, the bytesize is set as `1072` MB for the plot.
 
 ### Node instance
 
+Next, it creates a `Node` struct using the `subspace_sdk::Node::builder()` function. The `force_authoring` method is called with a value of `true`, which indicates that the node should always author new blocks. The `role` method is called with a value of `subspace_sdk::node::Role::Authority`, which indicates that the node should act as an authority node. There are 2 types of authorities: `Full`, `Authority`. The `build` method is then called with the node name, a development configuration, and a `PotConfiguration` struct with `is_pot_enabled` set to `false` and `is_node_time_keeper` set to `true`. Here, it's going to run the dev (local) chain. The `await` keyword is used to wait for the node to be built, and the `unwrap` method is called to panic if there is an error.
+
+```rust
+    let node = subspace_sdk::Node::builder()
+        .force_authoring(true)
+        .role(subspace_sdk::node::Role::Authority)
+        // Starting a new chain
+        .build(
+            "node",
+            subspace_sdk::chain_spec::dev_config(),
+            PotConfiguration { is_pot_enabled: false, is_node_time_keeper: true },
+        )
+        .await
+        .unwrap();
+```
+
+> Instead of `.unwrap()`, sometimes you may find `?` i.e. error propagation operator. It is used to propagate errors from the caller to the caller of the caller until it is handled using `Result` type.
+
 ### Farmer instance
 
-### Solution scanning
+```rust
+    let farmer = subspace_sdk::Farmer::builder()
+        .build(
+            subspace_sdk::PublicKey::from([0; 32]),
+            &node,
+            &plots,
+            NonZeroU8::new(1).expect("Static value should not fail; qed"),
+        )
+        .await
+        .expect("Failed to init a farmer");
+```
+
+This code is about creating a farmer instance using `subspace_sdk::Farmer` with the following configuration:
+
+- `build` method is called with the following arguments:
+  - `subspace_sdk::PublicKey::from([0; 32])` as the public key
+  - `&node` as the reference to the `subspace_sdk::Node` instance
+  - `&plots` as the reference to an array of `subspace_sdk::FarmDescription` instances
+  - `NonZeroU8::new(1).expect("Static value should not fail; qed")` as the number of farming threads
+
+### Plotting
+
+```rust
+    for plot in farmer.iter_farms().await {
+        let mut plotting_progress = plot.subscribe_initial_plotting_progress().await;
+        while plotting_progress.next().await.is_some() {}
+    }
+    tracing::info!("Initial plotting completed");
+```
+
+This code is about iterating over the farms/plots and finishing the plotting process for each of them.
+
+Here, the `plotting_progress` is subscribing to the initial progress of plotting of `plot[i]`. The `while` loop is ensuring that the plotting process is completed for the `plot[i]` before moving to the next `plot[i+1]`.
+
+And lastly once plotting for all the plots is done, it logs a completion message.
 
 ### Exit node
+
+This code snippet subscribes to new block headers from the Subspace network using the `subscribe_new_heads()` method of the `subspace_sdk::Node` instance named `node`. It then waits for 10 new block headers to arrive using the `take(10)` method, and for each new block header received, it logs an informational message using the `tracing::info!()` macro. Finally, the `for_each()` method is called on the stream of new block headers, which takes a closure that is executed for each new block header received. Once the 10th block header is received, the program exits.
+
+Here, the logging is done with key as `"New block!"` and then block header details with hash, number, roots, etc. And the `?` in `?header` is there to use the `fmt` to log the value in CLI.
+
+```rust
+    node.subscribe_new_heads()
+        .await
+        .unwrap()
+        // Wait 10 blocks and exit
+        .take(10)
+        .for_each(|header| async move { tracing::info!(?header, "New block!") })
+        .await;
+```
 
 ## Output
 
@@ -60,8 +148,6 @@ node/chains
             ├── table_00_00
             ├── table_00_17
 ```
-
-The blocks, plots data can be wiped out by removing the required folder(s) using `$ rm -rf node/chains/subspace_dev`.
 
 And the blocks production looks like this:
 
@@ -297,3 +383,5 @@ $ cargo run --example simple
 ```
 
 </details>
+
+> The blocks, plots data can be wiped out by removing the required folder(s) using `$ rm -rf node/chains/subspace_dev`. This is done to start fresh block production.
