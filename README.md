@@ -16,4 +16,10 @@ We will start with these:
 8. [x] How to create a subspace farm/plot?
 9. [x] How to scan for solution in subspace farms/plots?
 10. [x] How to exit a node after running few blocks?
-11. [ ] How to trace logs in CLI?
+11. [ ] How to trace logs in CLI for async tasks?
+
+## References
+
+- [Building a P2P Database in Rust](https://medium.com/dev-genius/building-a-p2p-database-in-rust-d120cf6f1dd2)
+- [Getting started with Tracing](https://tokio.rs/tokio/topics/tracing)
+- [Next steps with Tracing](https://tokio.rs/tokio/topics/tracing-next-steps)

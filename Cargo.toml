@@ -2,6 +2,7 @@
 members = [
     "async-fileio",
     "substrate-design-patterns",
+    "tracelogger",
     # "subspace-sdk-playground",
     # "rocksdb",
     # "trie",
