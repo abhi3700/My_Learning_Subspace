@@ -3,7 +3,7 @@ members = [
     "async-fileio",
     "substrate-design-patterns",
     "tracelogger",
-    # "subspace-sdk-playground",
+    "subspace-sdk-playground",
     # "rocksdb",
     # "trie",
     # "libp2p",
