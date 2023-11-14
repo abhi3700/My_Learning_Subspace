@@ -3,5 +3,3 @@ target/
 .DS_Store
 
 .vscode/
-
-subspace-sdk-playground/

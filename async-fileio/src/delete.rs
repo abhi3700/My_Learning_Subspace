@@ -31,6 +31,6 @@ pub(crate) async fn delete_entirely() -> Result<()> {
 
 /// delete partial content
 pub(crate) async fn delete_partially() -> Result<()> {
-    todo!();
+    // TODO:;
     Ok(())
 }
