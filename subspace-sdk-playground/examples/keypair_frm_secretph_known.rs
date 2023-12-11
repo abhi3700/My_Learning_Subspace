@@ -3,10 +3,11 @@
 use sp_core::Pair;
 use zeroize::Zeroizing;
 
-#[tokio::main]
-async fn main() {
+// #[tokio::main]
+fn main() {
     // secret phrase is known
-    let secret_phrase = "test test test test test test test test test test test junk";
+    let secret_phrase =
+        "lock frost nation imitate party medal knee cigar rough wine document immense";
 
     // generate key pair from given secret phrase
     let (pair, seed): (

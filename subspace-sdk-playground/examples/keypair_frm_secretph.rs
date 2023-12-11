@@ -3,8 +3,7 @@
 use sp_core::Pair;
 use zeroize::Zeroizing;
 
-#[tokio::main]
-async fn main() {
+fn main() {
     // generate new mnemonic and key pair
     let (pair, phrase, seed): (
         sp_core::sr25519::Pair,
