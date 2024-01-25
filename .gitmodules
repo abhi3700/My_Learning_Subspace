@@ -1,3 +1,6 @@
 [submodule "substrate-design-patterns"]
 	path = substrate-design-patterns
 	url = https://github.com/abhi3700/substrate-design-patterns.git
+[submodule "devbook"]
+	path = devbook
+	url = https://github.com/abhi3700/subspace-devbook.git
