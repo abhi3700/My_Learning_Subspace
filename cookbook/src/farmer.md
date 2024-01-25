@@ -61,3 +61,7 @@ impl FarmDescription {
     }
 }
 ```
+
+### How to farm?
+
+This has been abstracted in the `pulsar` tool. The `farm` command is responsible for farming. [Chapter](./pulsar/farm.md).
