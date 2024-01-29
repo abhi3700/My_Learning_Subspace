@@ -11,20 +11,20 @@ use sp_core::sr25519::Public;
 
 fn convert_to_subspace_address(
     address: &str,
-    new_format: Ss58AddressFormat,
+    expected_format: Ss58AddressFormat,
 ) -> eyre::Result<String> {
     // check & decode the public key from address as per base-58 (as used in Bitcoin) i.e. SS58.
     let (public_key, _) =
         Public::from_ss58check_with_version(address).map_err(|_| eyre::eyre!("Invalid address"))?;
 
     // convert from public key to address with new format as specified.
-    Ok(public_key.to_ss58check_with_version(new_format))
+    Ok(public_key.to_ss58check_with_version(expected_format))
 }
 
 fn main() {
     let address = "5DepcPH2mXTLeLubiF5kXdbtgdFKc53mt6J6Ne8ethqpVem4";
-    let new_format = Ss58AddressFormat::custom(2254);
-    match convert_to_subspace_address(address, new_format) {
+    let expected_format = Ss58AddressFormat::custom(2254);
+    match convert_to_subspace_address(address, expected_format) {
         Ok(new_address) => println!("New address: {}", new_address),
         Err(err) => println!("Error: {}", err),
     }
