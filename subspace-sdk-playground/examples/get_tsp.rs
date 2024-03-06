@@ -1,6 +1,7 @@
 //! Get realtime value of "Total Space Pledged (TSP)"
 //! GraphQL url for this: https://squid.gemini-3g.subspace.network/graphql
 //!
+//! This is for a block:
 //! ```
 //! query {
 //!   blocks(limit: 1, offset: 0, orderBy: height_DESC) {
@@ -15,6 +16,13 @@
 //!       eventsCount
 //!     }
 //! }
+//! But, it can be reduced to
+//! query {
+//!   blocks(limit: 1, offset: 0, orderBy: height_DESC) {
+//!       spacePledged
+//!     }
+//! }
+//! as we only need `spacePledged`.
 //! ```
 
 use reqwest::Client;
