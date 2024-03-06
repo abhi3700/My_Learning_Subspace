@@ -22,7 +22,7 @@ fn convert_to_subspace_address(
 }
 
 fn main() {
-    let address = "5DepcPH2mXTLeLubiF5kXdbtgdFKc53mt6J6Ne8ethqpVem4";
+    let address = "5GKYVQZDpzXNfkpqxxexYYq1KQLfGnoCbQupq3QDh1A6NNqb";
     let expected_format = Ss58AddressFormat::custom(2254);
     match convert_to_subspace_address(address, expected_format) {
         Ok(new_address) => println!("New address: {}", new_address),
