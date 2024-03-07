@@ -91,9 +91,11 @@ fn calculate_expected_reward_duration_from_now(
 ) -> i64 {
     // Time elapsed since the last reward payment timestamp.
     let time_previous = Utc::now().timestamp() - last_reward_timestamp.unwrap_or(0);
+    dbg!(time_previous);
 
     // Expected time duration for next reward payment since the last reward payment timestamp.
     let expected_time_next = (total_space_pledged as i64 / space_pledged as i64) * time_previous;
+    dbg!(expected_time_next);
 
     expected_time_next - time_previous
 }
@@ -104,15 +106,15 @@ fn calculate_expected_reward_duration_from_now(
 async fn main() -> eyre::Result<()> {
     let query = String::from(
         r#"query {
-                blocks(limit: 1, offset: 0, orderBy: height_DESC) {
-                    spacePledged
+            blocks(limit: 1, offset: 0, orderBy: height_DESC) {
+                spacePledged
+            }
+            rewardEvents(limit: 1, where: {name_eq: "Rewards.VoteReward"}, orderBy: timestamp_DESC) {
+                block {
+                    timestamp
                 }
-                rewardEvents(limit: 1, where: {name_eq: "Rewards.VoteReward"}, orderBy: timestamp_DESC) {
-                    block {
-                        timestamp
-                    }
-                }            
-            }"#,
+            }            
+        }"#,
     );
 
     let response_body: GraphQLResponse<BlocksResponse> = get_response_body(query).await?;
@@ -138,13 +140,15 @@ async fn main() -> eyre::Result<()> {
     };
 
     println!(
-        "total space pledged: {} bytes, \ntimestamp: {}",
+        "total space pledged: {} bytes, \nLast reward timestamp: {}",
         total_space_pledged,
         last_reward_timestamp.unwrap_or(0)
     );
 
-    // 2 GB in bytes = 2147483648
-    let space_pledged = 2_147_483_648;
+    // 2 GiB in bytes
+    // let space_pledged = 2_147_483_648;
+    // let space_pledged = 100_000_000_000; // 100 GB in bytes
+    let space_pledged = 2_199_023_255_552; // 2 TiB in bytes
 
     println!(
         "The farmer can expect to get the next reward payment in another {} seconds.",
