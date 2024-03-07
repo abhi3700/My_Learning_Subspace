@@ -91,11 +91,9 @@ fn calculate_expected_reward_duration_from_now(
 ) -> i64 {
     // Time elapsed since the last reward payment timestamp.
     let time_previous = Utc::now().timestamp() - last_reward_timestamp.unwrap_or(0);
-    dbg!(time_previous);
 
     // Expected time duration for next reward payment since the last reward payment timestamp.
     let expected_time_next = (total_space_pledged as i64 / space_pledged as i64) * time_previous;
-    dbg!(expected_time_next);
 
     expected_time_next - time_previous
 }
