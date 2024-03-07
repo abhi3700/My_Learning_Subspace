@@ -143,8 +143,7 @@ async fn main() -> eyre::Result<()> {
         last_reward_timestamp.unwrap_or(0)
     );
 
-    // 2 GiB in bytes
-    // let space_pledged = 2_147_483_648;
+    // let space_pledged = 2_147_483_648; // 2 GiB in bytes
     // let space_pledged = 100_000_000_000; // 100 GB in bytes
     let space_pledged = 2_199_023_255_552; // 2 TiB in bytes
 
