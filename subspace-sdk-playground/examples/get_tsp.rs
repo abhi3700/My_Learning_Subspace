@@ -1,4 +1,4 @@
-//! Get realtime value of "Total Space Pledged (TSP)"
+//! Get the latest value of "Total Space Pledged (TSP)"
 //! GraphQL url for this: https://squid.gemini-3g.subspace.network/graphql
 //!
 //! This is for a block:
