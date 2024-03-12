@@ -35,14 +35,16 @@ We will start with these:
 - Astral (for both Consensus, Nova chains):
   - [Gemini-3h Consensus](https://explorer.subspace.network/#/gemini-3h/consensus)
   - [Gemini-3g Consensus](https://explorer.subspace.network/#/gemini-3g/consensus)
-
+- Blockscout (for Nova EVM chain)
 - **Polkadot.js** (for Consensus chain):
   - [Gemini-3h](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-0.gemini-3h.subspace.network%2Fws%20#/explorer)
   - [Gemini-3g](https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-0.gemini-3g.subspace.network%2Fws#/explorer)
-- Subscan (for Consensus chain):
+- **Subscan** (for Consensus chain):
   - [Gemini-3h](https://subspace.subscan.io/)
 
 ### RPC
+
+> Here, instead of RESTful APIs, GraphQL are used. This is more efficient as we can fetch multiple data at once, rather than requesting server for each endpoints separately.
 
 - Gemini-3g Nova graphQL URL: <https://nova.squid.gemini-3g.subspace.network/graphql>
 - Gemini-3g Nova API URL: <https://nova.gemini-3g.subspace.network/ws>
