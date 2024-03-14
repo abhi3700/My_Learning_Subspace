@@ -24,3 +24,6 @@ reqwest = { version = "0.11.24", features = ["json"] }
 # Error handling
 eyre = "0.6"
 chrono = "0.4.35"
+
+# substrate node client
+subxt = { version = "0.34", features = ["substrate-compat", "native", "jsonrpsee"] }
