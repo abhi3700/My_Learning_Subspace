@@ -21,6 +21,9 @@
 //!
 //! > By default, the url is `ws://127.0.0.1:9944`. But for custom, need to use `--url`.
 //!
+//!
+//! NOTE: Better approach is now to use runtime_api wrapper which offloads the technical debt (using this approach). We should define via `decl_runtime_apis` (in pallet) & `impl_runtime_apis` (in runtime).
+//! Example commit: Fetching solution ranges here: https://github.com/subspace/space-acres/blob/15532b86e5da32986a0e3ce447a57b6712b89d25/src/backend/node.rs#L300-L305
 
 use subxt::config::PolkadotConfig;
 use subxt::OnlineClient;
