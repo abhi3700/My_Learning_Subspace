@@ -59,7 +59,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     let res = client
-        .post("https://squid.gemini-3g.subspace.network/graphql")
+        .post("https://squid.gemini-3h.subspace.network/graphql")
         .json(&graphql_query)
         .send()
         .await?;

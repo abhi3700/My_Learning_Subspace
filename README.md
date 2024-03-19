@@ -28,6 +28,10 @@ We will start with these:
 - [subnomicon: The Subspace Network Protocol Knowledge Base](https://github.com/subspace/subnomicon)
 - [subspace-docs: Official Documentation for Subspace Labs & the Subspace Network](https://github.com/subspace/subspace-docs)
 
+## Developer
+
+As a developer, it's suggested to go through the substrate resources collated [here](https://github.com/abhi3700/My_Learning_Substrate/) by me.
+
 ## Tools
 
 ### Explorer
@@ -44,11 +48,18 @@ We will start with these:
 
 ### RPC
 
-> Here, instead of RESTful APIs, GraphQL are used. This is more efficient as we can fetch multiple data at once, rather than requesting server for each endpoints separately.
+> Here, instead of RESTful APIs, GraphQL are preferred. It is more efficient as we can fetch multiple data at once, rather than requesting server for each endpoints separately.
+>
+> NOTE: GraphQL data is slow by 10 blocks due to indexing.
 
-- Gemini-3g Nova graphQL URL: <https://nova.squid.gemini-3g.subspace.network/graphql>
-- Gemini-3g Nova API URL: <https://nova.gemini-3g.subspace.network/ws>
-- Gemini-3g Consensus graphQL URL: <https://squid.gemini-3g.subspace.network/graphql>
+- Gemini-3g:
+  - Nova graphQL URL: <https://nova.squid.gemini-3g.subspace.network/graphql>
+  - Nova API URL: <https://nova.gemini-3g.subspace.network/ws>
+  - Consensus graphQL URL: <https://squid.gemini-3g.subspace.network/graphql>
+- Gemini-3h
+  - Nova graphQL URL: <https://nova.squid.gemini-3h.subspace.network/graphql>
+  - Nova API URL: TODO: Add this
+  - Consensus graphQL URL: <https://squid.gemini-3h.subspace.network/graphql>
 
 ### Telemetry
 
@@ -56,6 +67,8 @@ Subspace telemetry is available at <https://telemetry.subspace.network/#stats/0x
 You also get to view the nodes distributed geographically like this:
 
 ![](img/subspace-telemetry-geography.png)
+
+There is a repo: [substation](https://github.com/subspace/substation) (last updated 2 years ago) that is fork of [paritytech/substrate-telemetry](https://github.com/paritytech/substrate-telemetry).
 
 ## References
 
